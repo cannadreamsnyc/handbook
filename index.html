@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales Floor Handbook — Cannadreams</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Internal sales floor operations handbook for Cannadreams staff.">
+<style>
+  :root{
+    --ink:#1c1a22;
+    --paper:#f6f2ea;
+    --paper-raised:#ffffff;
+    --accent:#584aa8;
+    --accent-soft:#ece8fb;
+    --line:#ddd5c4;
+    --muted:#6b6458;
+    --ok:#2f6b57;
+    --ok-soft:#e3f0ea;
+    --warn:#9a6417;
+    --warn-soft:#faf0dd;
+    --crit:#a13c3c;
+    --crit-soft:#f8e6e2;
+    --radius:10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ink:#ece7dc;
+      --paper:#17151c;
+      --paper-raised:#201d27;
+      --accent:#a99cf3;
+      --accent-soft:#2c2740;
+      --line:#3a3542;
+      --muted:#a49c8c;
+      --ok:#7fc9ab;
+      --ok-soft:#1f332b;
+      --warn:#e0ac5c;
+      --warn-soft:#3a2e18;
+      --crit:#e08787;
+      --crit-soft:#3a2320;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#ece7dc;
+    --paper:#17151c;
+    --paper-raised:#201d27;
+    --accent:#a99cf3;
+    --accent-soft:#2c2740;
+    --line:#3a3542;
+    --muted:#a49c8c;
+    --ok:#7fc9ab;
+    --ok-soft:#1f332b;
+    --warn:#e0ac5c;
+    --warn-soft:#3a2e18;
+    --crit:#e08787;
+    --crit-soft:#3a2320;
+  }
+  :root[data-theme="light"]{
+    --ink:#1c1a22;
+    --paper:#f6f2ea;
+    --paper-raised:#ffffff;
+    --accent:#584aa8;
+    --accent-soft:#ece8fb;
+    --line:#ddd5c4;
+    --muted:#6b6458;
+    --ok:#2f6b57;
+    --ok-soft:#e3f0ea;
+    --warn:#9a6417;
+    --warn-soft:#faf0dd;
+    --crit:#a13c3c;
+    --crit-soft:#f8e6e2;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family: "Iowan Old Style","Palatino Linotype","URW Palladio L",Georgia,serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  .doc{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 clamp(20px,4vw,56px) 80px;
+  }
+
+  /* ---- Cover block ---- */
+  .cover{
+    padding:56px 0 40px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:8px;
+  }
+  .eyebrow{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+    margin:0 0 14px;
+  }
+  h1.title{
+    font-size:clamp(32px,4.6vw,52px);
+    line-height:1.08;
+    margin:0 0 12px;
+    text-wrap:balance;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .subtitle{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--muted);
+    font-size:17px;
+    max-width:60ch;
+    margin:0 0 28px;
+  }
+  .metaband{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13px;
+  }
+  .metaband dt{
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--muted);
+    font-size:11px;
+    margin-bottom:3px;
+  }
+  .metaband dd{
+    margin:0;
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---- Layout: TOC rail + content ---- */
+  .layout{
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:48px;
+    align-items:start;
+    margin-top:36px;
+  }
+  @media (max-width:820px){
+    .layout{grid-template-columns:1fr;}
+    .toc{position:static; order:2;}
+  }
+  .toc{
+    position:sticky;
+    top:24px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13px;
+  }
+  .toc-label{
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-size:11px;
+    color:var(--muted);
+    margin:0 0 10px;
+  }
+  .toc ol{
+    list-style:none;
+    margin:0;
+    padding:0;
+    border-left:1px solid var(--line);
+  }
+  .toc li{margin:0;}
+  .toc a{
+    display:block;
+    padding:7px 0 7px 14px;
+    color:var(--ink);
+    text-decoration:none;
+    border-left:2px solid transparent;
+    margin-left:-1px;
+    opacity:.75;
+  }
+  .toc a:hover, .toc a:focus-visible{
+    opacity:1;
+    border-left-color:var(--accent);
+    color:var(--accent);
+    outline:none;
+  }
+  .toc .num{
+    font-variant-numeric:tabular-nums;
+    color:var(--muted);
+    margin-right:6px;
+  }
+
+  main{min-width:0;}
+
+  section.sec{
+    padding:38px 0;
+    border-bottom:1px solid var(--line);
+    scroll-margin-top:20px;
+  }
+  section.sec:last-child{border-bottom:none;}
+
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:16px;
+  }
+  .sec-num{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13px;
+    font-weight:700;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border-radius:6px;
+    padding:3px 8px;
+    font-variant-numeric:tabular-nums;
+    flex:none;
+  }
+  h2{
+    font-size:clamp(21px,2.4vw,26px);
+    margin:0;
+    font-weight:600;
+    text-wrap:balance;
+  }
+  h3{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--muted);
+    margin:24px 0 10px;
+    font-weight:600;
+  }
+  p{margin:0 0 14px; max-width:66ch;}
+  ul, ol.steps{margin:0 0 14px; padding-left:22px; max-width:64ch;}
+  li{margin-bottom:7px;}
+  ol.steps{counter-reset:step;}
+  ol.steps li{
+    list-style:none;
+    counter-increment:step;
+    position:relative;
+    padding-left:8px;
+    margin-bottom:11px;
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:-26px;
+    top:1px;
+    width:19px;
+    height:19px;
+    border-radius:50%;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:11px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-variant-numeric:tabular-nums;
+  }
+
+  strong{font-weight:700;}
+
+  /* ---- Callouts ---- */
+  .callout{
+    border-radius:var(--radius);
+    padding:16px 18px;
+    margin:16px 0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:14.5px;
+    max-width:66ch;
+  }
+  .callout p{margin:0; max-width:none;}
+  .callout p + p{margin-top:8px;}
+  .callout-label{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .callout-label .dot{width:7px; height:7px; border-radius:50%; flex:none;}
+  .callout.required{background:var(--crit-soft); color:var(--ink);}
+  .callout.required .callout-label{color:var(--crit);}
+  .callout.required .dot{background:var(--crit);}
+  .callout.compliance{background:var(--warn-soft); color:var(--ink);}
+  .callout.compliance .callout-label{color:var(--warn);}
+  .callout.compliance .dot{background:var(--warn);}
+  .callout.tip{background:var(--ok-soft); color:var(--ink);}
+  .callout.tip .callout-label{color:var(--ok);}
+  .callout.tip .dot{background:var(--ok);}
+
+  /* ---- Table ---- */
+  .tablewrap{overflow-x:auto; margin:16px 0 20px;}
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:480px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13.5px;
+  }
+  th, td{
+    text-align:left;
+    padding:9px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    font-size:11px;
+    color:var(--muted);
+    font-weight:600;
+  }
+  td.num{font-variant-numeric:tabular-nums;}
+
+  .idlist{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:0 0 14px;
+    padding:0;
+    list-style:none;
+  }
+  .idlist li{
+    margin:0;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:5px 13px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:13px;
+  }
+
+  footer.docfoot{
+    margin-top:20px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:12.5px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  a{color:var(--accent);}
+
+  html{color-scheme: light dark;}
+  body{margin:0;}
+</style>
+</head>
+<body>
+
+<div class="doc">
+
+  <div class="cover">
+    <p class="eyebrow">Cannadreams &middot; Internal Operations</p>
+    <h1 class="title">Sales Floor Handbook</h1>
+    <p class="subtitle">Standard rules of operation for budtenders and sales floor staff at the Hell's Kitchen store. Read in full before your first shift; keep it nearby for reference after.</p>
+    <dl class="metaband">
+      <div><dt>Location</dt><dd>862 9th Ave, New York, NY 10019</dd></div>
+      <div><dt>License</dt><dd>OCMCAURD-2022-000407</dd></div>
+      <div><dt>Applies to</dt><dd>In-store sales floor staff</dd></div>
+      <div><dt>Status</dt><dd>Draft for owner review</dd></div>
+    </dl>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-label">Contents</p>
+      <ol>
+        <li><a href="#purpose"><span class="num">01</span>Purpose &amp; Scope</a></li>
+        <li><a href="#opening"><span class="num">02</span>Before the Floor Opens</a></li>
+        <li><a href="#id-check"><span class="num">03</span>Age &amp; ID Verification</a></li>
+        <li><a href="#conduct"><span class="num">04</span>Customer Interaction</a></li>
+        <li><a href="#product"><span class="num">05</span>Product Handling</a></li>
+        <li><a href="#transactions"><span class="num">06</span>Payment &amp; Transactions</a></li>
+        <li><a href="#limits"><span class="num">07</span>Purchase Limits</a></li>
+        <li><a href="#discounts"><span class="num">08</span>Discounts &amp; Promotions</a></li>
+        <li><a href="#closing"><span class="num">09</span>Closing the Floor</a></li>
+        <li><a href="#prohibited"><span class="num">10</span>Prohibited Conduct</a></li>
+        <li><a href="#security"><span class="num">11</span>Security &amp; Emergencies</a></li>
+        <li><a href="#violations"><span class="num">12</span>Reporting a Problem</a></li>
+      </ol>
+    </nav>
+
+    <main>
+
+      <section class="sec" id="purpose">
+        <div class="sec-head"><span class="sec-num">01</span><h2>Purpose &amp; Scope</h2></div>
+        <p>This section of the handbook covers the rules that govern the sales floor at the Hell's Kitchen store: how we check ID, how we talk to customers, how we handle product and payment, and what happens when something goes wrong. It applies to every budtender, shift lead, and sales floor associate working the floor, not to delivery drivers or back-of-house staff.</p>
+        <p>These rules exist to keep every sale legal under New York State cannabis law, keep the store and its staff safe, and keep the experience consistent for every customer who walks in.</p>
+        <div class="callout required">
+          <p class="callout-label"><span class="dot"></span>Draft, not final policy</p>
+          <p>This is a starting draft built from public NY OCM rules and Cannadreams brand standards. Review and edit before handing it to staff. Anything marked <strong>confirm with management</strong> should be checked against current internal policy before it's treated as binding.</p>
+        </div>
+      </section>
+
+      <section class="sec" id="opening">
+        <div class="sec-head"><span class="sec-num">02</span><h2>Before the Floor Opens</h2></div>
+        <h3>Appearance &amp; readiness</h3>
+        <ul>
+          <li>Arrive on time, in uniform, with your staff badge visible.</li>
+          <li>No visible intoxication of any kind at the start of or during a shift. This includes cannabis.</li>
+          <li>Phones stay off the sales floor except for POS or store business.</li>
+        </ul>
+        <h3>Opening checklist</h3>
+        <ol class="steps">
+          <li>Confirm the POS terminal and ID scanner are powered on and functioning.</li>
+          <li>Walk the display cases: product labels legible, nothing expired, nothing out of place.</li>
+          <li>Confirm the day's active discounts and offers match what's listed in the system before quoting them to a customer.</li>
+          <li>Check the cash drawer against the prior shift's close-out count.</li>
+          <li>Confirm the "Walk-ins Welcome" signage is out. Walk-ins are encouraged, never turned away for lack of a reservation.</li>
+        </ol>
+      </section>
+
+      <section class="sec" id="id-check">
+        <div class="sec-head"><span class="sec-num">03</span><h2>Age &amp; ID Verification</h2></div>
+        <p>Every customer is checked for a valid ID and 21+ age <strong>before</strong> they're allowed past the check-in point, no exceptions, regardless of how old someone appears.</p>
+        <h3>Accepted ID</h3>
+        <ul class="idlist">
+          <li>State driver's license</li>
+          <li>State non-driver ID</li>
+          <li>U.S. passport / passport card</li>
+          <li>Military ID</li>
+          <li>Permanent resident card</li>
+        </ul>
+        <div class="callout compliance">
+          <p class="callout-label"><span class="dot"></span>Compliance rule</p>
+          <p>Reject any ID that is expired, damaged to the point a security feature can't be checked, or doesn't visually match the person presenting it. A polite decline and a request for alternate ID is always the right call over guessing.</p>
+        </div>
+        <h3>If ID is refused or fails</h3>
+        <p>Decline entry to the sales floor. Do not argue or explain OCM regulations in detail on the floor; a short "we're not able to serve you without valid ID" is enough. Escalate to a shift lead if the customer becomes upset.</p>
+      </section>
+
+      <section class="sec" id="conduct">
+        <div class="sec-head"><span class="sec-num">04</span><h2>Customer Interaction</h2></div>
+        <ul>
+          <li>Greet every customer once they clear ID check. Ask what they're looking for rather than launching into a pitch.</li>
+          <li>Speak to effects and product category, not medical claims. Never tell a customer a product will treat, cure, or manage a medical condition.</li>
+          <li>State THC/CBD percentages only from the current product label, never from memory or estimate.</li>
+          <li>Never sell, or appear to sell, to anyone who is visibly intoxicated on the floor already.</li>
+          <li>Guests waiting for a customer may wait in the designated area, not the sales floor itself, unless they are also making a purchase and have cleared ID check.</li>
+        </ul>
+        <div class="callout tip">
+          <p class="callout-label"><span class="dot"></span>Tone</p>
+          <p>Cannadreams is walk-in friendly and low-pressure. A customer should leave knowing more than when they came in, not feeling sold to.</p>
+        </div>
+      </section>
+
+      <section class="sec" id="product">
+        <div class="sec-head"><span class="sec-num">05</span><h2>Product Handling</h2></div>
+        <ul>
+          <li>Sealed product stays sealed until it's sold. Never open a package to show or let a customer smell product on the floor.</li>
+          <li>Display samples (if used) are handled with gloves and never returned to sellable inventory.</li>
+          <li>Any product that's damaged, expired, or subject to a recall is pulled from the floor immediately and flagged to a shift lead, not just set aside.</li>
+          <li>Every item leaving the store must ring through the POS and print with its required exit packaging and label. Nothing leaves the building without both.</li>
+        </ul>
+      </section>
+
+      <section class="sec" id="transactions">
+        <div class="sec-head"><span class="sec-num">06</span><h2>Payment &amp; Transactions</h2></div>
+        <p>In-store purchases at the Hell's Kitchen location may be paid by:</p>
+        <ul>
+          <li>Cash</li>
+          <li>Debit card</li>
+          <li>Check transfer</li>
+          <li>Aeropay</li>
+        </ul>
+        <div class="callout compliance">
+          <p class="callout-label"><span class="dot"></span>Delivery is different</p>
+          <p>Cash is <strong>not</strong> permitted for delivery orders under NY OCM rules; delivery is prepaid only. That restriction does not apply to in-store sales, but do not tell a customer they can pay cash on a delivery order.</p>
+        </div>
+        <ul>
+          <li>Count cash back to the customer out loud before closing the drawer.</li>
+          <li>Every sale gets a receipt, printed or emailed, no exceptions.</li>
+          <li>Void or refund a transaction only with shift lead approval, entered in the POS, never handled off-system.</li>
+        </ul>
+      </section>
+
+      <section class="sec" id="limits">
+        <div class="sec-head"><span class="sec-num">07</span><h2>Purchase Limits</h2></div>
+        <p>New York State caps how much adult-use cannabis a single customer can buy in one visit. The POS enforces this automatically, but staff should still recognize when a cart is approaching the limit.</p>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Limit per transaction</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Flower</td><td class="num">3 ounces</td></tr>
+              <tr><td>Concentrate</td><td class="num">24 grams</td></tr>
+              <tr><td>Edibles / other</td><td class="num">Equivalent under state conversion table</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout compliance">
+          <p class="callout-label"><span class="dot"></span>Confirm with management</p>
+          <p>These figures reflect published NY OCM adult-use limits at the time this draft was written. State limits can change; confirm current figures before this section is finalized, and never override a POS block manually.</p>
+        </div>
+      </section>
+
+      <section class="sec" id="discounts">
+        <div class="sec-head"><span class="sec-num">08</span><h2>Discounts &amp; Promotions</h2></div>
+        <ul>
+          <li>Only apply discounts that are live in the POS system for that day. Don't take a customer's word that a code or promotion is active.</li>
+          <li><strong>CANNADREAMS20</strong> (20% off a first order) is the only standing sitewide discount code; in-store promotions may run separately and change more often.</li>
+          <li>Discounts do not stack unless the POS explicitly allows it. If a customer expects two offers to combine and the system doesn't allow it, explain that plainly rather than manually adjusting the price.</li>
+        </ul>
+      </section>
+
+      <section class="sec" id="closing">
+        <div class="sec-head"><span class="sec-num">09</span><h2>Closing the Floor</h2></div>
+        <ol class="steps">
+          <li>Stop admitting new customers at the posted close time; finish serving anyone already on the floor.</li>
+          <li>Count the drawer against the day's POS total and log any discrepancy immediately, don't wait until the next shift.</li>
+          <li>Secure all product in the safe or vault per store policy, no product left in open display overnight.</li>
+          <li>Lock ID scanner and POS terminal.</li>
+          <li>Note anything unusual from the shift, refused sales, incidents, low stock, in the shift log for the next team.</li>
+        </ol>
+      </section>
+
+      <section class="sec" id="prohibited">
+        <div class="sec-head"><span class="sec-num">10</span><h2>Prohibited Conduct</h2></div>
+        <ul>
+          <li>No consumption of any cannabis product on the premises, staff or customer. Cannadreams is not licensed for on-site consumption.</li>
+          <li>No personal cannabis use during a shift, including breaks taken on or near store premises.</li>
+          <li>No discounting, comping, or gifting product outside the POS system, for anyone, for any reason.</li>
+          <li>No removing product from inventory for personal use, "just to try it," or as a gift.</li>
+          <li>No sharing customer purchase history or personal information outside of store business.</li>
+        </ul>
+        <div class="callout required">
+          <p class="callout-label"><span class="dot"></span>Zero tolerance</p>
+          <p>Any of the above is grounds for immediate suspension pending review, not a verbal warning.</p>
+        </div>
+      </section>
+
+      <section class="sec" id="security">
+        <div class="sec-head"><span class="sec-num">11</span><h2>Security &amp; Emergencies</h2></div>
+        <ul>
+          <li>In a robbery or threat situation: comply, do not resist, do not chase anyone who flees. Product and cash are replaceable, staff are not.</li>
+          <li>Hit the panic alarm only after the immediate threat has passed or once it's safe to do so.</li>
+          <li>Call 911 first, then notify the shift lead and owner.</li>
+          <li>Do not discuss an incident publicly or on social media before it's been reviewed internally.</li>
+        </ul>
+      </section>
+
+      <section class="sec" id="violations">
+        <div class="sec-head"><span class="sec-num">12</span><h2>Reporting a Problem</h2></div>
+        <p>If you see a coworker violate any rule in this handbook, or you're asked to do something that conflicts with it, report it to a shift lead or directly to ownership. Reports are taken seriously and are not held against the person reporting in good faith.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="docfoot">
+    <span>Cannadreams &middot; Sales Floor Handbook &middot; Draft v0.1</span>
+    <span>862 9th Ave, New York, NY 10019 &middot; License OCMCAURD-2022-000407</span>
+  </footer>
+
+</div>
+</body>
+</html>
